@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
   def index
-    articles = User.all
-    render json: "users"
+    users = User.all
+    render json: users
   end
 
   def create
+    user = User.new(users_params)
+    user.save
+    render json: user
     
   end
 
@@ -17,5 +20,9 @@ class UsersController < ApplicationController
   end
 
   def delete
+  end
+
+  def users_params
+    params.require(:user).permit(:name, :phone, :email, :birthdate)
   end
 end
